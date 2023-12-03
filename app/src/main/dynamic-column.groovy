@@ -3,9 +3,9 @@ def getColumns(String header) {
     def col2 = getIndexes(header, col1.end, 'col_3')
     def col3 = getIndexes(header, col2.end)
     [
-            column1 : col1,
-            column2 : col2,
-            column3 : col3,
+            col1,
+            col2,
+            col3,
     ]
 }
 
@@ -16,8 +16,19 @@ def getIndexes(String header, int start, String nextMarker = null) {
     ]
 }
 
-assert getColumns('col1  column2      col_3   ') == [
-        column1 : [start : 0, end : 6],
-        column2 : [start : 6, end : 19],
-        column3 : [start : 19, end : 27]
+def parse(String line, List columns) {
+    columns.collect { col ->
+        line.substring(col.start, col.end).trim()
+    }
+}
+
+def example = 'col1  column2      col_3   '
+def columns = getColumns(example)
+
+assert columns == [
+        [start : 0, end : 6],
+        [start : 6, end : 19],
+        [start : 19, end : 27],
 ]
+
+assert parse(example, columns) == ['col1', 'column2', 'col_3']
