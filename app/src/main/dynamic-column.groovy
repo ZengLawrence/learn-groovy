@@ -1,7 +1,10 @@
+class Constant {
+    static final String END_MARKER = null
+}
+
 def getColumns(String header, List<String> markers) {
-    String endMarker = null
     markers.drop(1)
-            .plus(endMarker)
+            .plus(Constant.END_MARKER)
             .inject([]) { List cols, nextMarker ->
         if (cols.size() == 0) {
             cols + getIndexes(header, 0, nextMarker)
@@ -11,10 +14,10 @@ def getColumns(String header, List<String> markers) {
     }
 }
 
-def getIndexes(String header, int start, String nextMarker = null) {
+def getIndexes(String header, int start, String nextMarker = Constant.END_MARKER) {
     [
             start : start,
-            end : nextMarker != null ? header.indexOf(nextMarker, start) : header.size()
+            end : nextMarker != Constant.END_MARKER ? header.indexOf(nextMarker, start) : header.size()
     ]
 }
 
