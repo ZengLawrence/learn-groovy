@@ -22,13 +22,16 @@ def parse(String line, List columns) {
     }
 }
 
-def example = 'col1  column2      col_3   '
-def columns = getColumns(example)
+{
+    // with trailing spaces
+    def example = 'col1  column2      col_3   '
+    def columns = getColumns(example)
 
-assert columns == [
-        [start : 0, end : 6],
-        [start : 6, end : 19],
-        [start : 19, end : 27],
-]
+    assert columns == [
+            [start: 0, end: 6],
+            [start: 6, end: 19],
+            [start: 19, end: 27],
+    ]
 
-assert parse(example, columns) == ['col1', 'column2', 'col_3']
+    assert parse(example, columns) == ['col1', 'column2', 'col_3']
+}
