@@ -35,3 +35,17 @@ def parse(String line, List columns) {
 
     assert parse(example, columns) == ['col1', 'column2', 'col_3']
 }
+
+{
+    // no trailing spaces
+    def example = 'col1  column2      col_3'
+    def columns = getColumns(example)
+
+    assert columns == [
+            [start: 0, end: 6],
+            [start: 6, end: 19],
+            [start: 19, end: 24],
+    ]
+
+    assert parse(example, columns) == ['col1', 'column2', 'col_3']
+}
