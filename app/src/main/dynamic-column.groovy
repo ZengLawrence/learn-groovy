@@ -1,6 +1,5 @@
-def getColumns(String header) {
-    def markers = ['col1', 'column2', 'col_3']
-    def endMarker = null
+def getColumns(String header, List<String> markers) {
+    String endMarker = null
     markers.drop(1)
             .plus(endMarker)
             .inject([]) { List cols, nextMarker ->
@@ -28,7 +27,8 @@ def parse(String line, List columns) {
 {
     // with trailing spaces
     def example = 'col1  column2      col_3   '
-    def columns = getColumns(example)
+    def markers = ['col1', 'column2', 'col_3']
+    def columns = getColumns(example, markers)
 
     assert columns == [
             [start: 0, end: 6],
@@ -42,7 +42,8 @@ def parse(String line, List columns) {
 {
     // no trailing spaces
     def example = 'col1  column2      col_3'
-    def columns = getColumns(example)
+    def markers = ['col1', 'column2', 'col_3']
+    def columns = getColumns(example, markers)
 
     assert columns == [
             [start: 0, end: 6],
