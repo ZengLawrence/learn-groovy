@@ -1,12 +1,15 @@
 def getColumns(String header) {
-    def col1 = getIndexes(header, 0, 'column2')
-    def col2 = getIndexes(header, col1.end, 'col_3')
-    def col3 = getIndexes(header, col2.end)
-    [
-            col1,
-            col2,
-            col3,
-    ]
+    def markers = ['col1', 'column2', 'col_3']
+    def endMarker = null
+    markers.drop(1)
+            .plus(endMarker)
+            .inject([]) { List cols, nextMarker ->
+        if (cols.size() == 0) {
+            cols + getIndexes(header, 0, nextMarker)
+        } else {
+            cols + getIndexes(header, cols.last().end, nextMarker)
+        }
+    }
 }
 
 def getIndexes(String header, int start, String nextMarker = null) {
