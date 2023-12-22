@@ -37,6 +37,7 @@ def test3 = { String json ->
         mapper.readValue(json, Map)
         return "VALID"
     } catch (ignored) {
+        println ignored.message
         return "INVALID"
     }
 }
