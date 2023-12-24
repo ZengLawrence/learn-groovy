@@ -5,7 +5,19 @@ import groovy.json.JsonSlurper
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.DeserializationFeature
 
-def json1 = '{"name": "John", "data": [{"id": 1},{"id": 2},]}'
+def json1 = '''
+{
+  "name": "John",
+  "data": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+  ]
+}
+'''
 def json2 = '{"name": "John", "data": [{"id": 1},{"id": 2}],}'
 def json3 = '{"name": "John", "data": [{"id": 1},{"id": 2}]},'
 def json4 = '{"name": "John", "data": [{"id": 1},{"id": 2}]}... abc'
