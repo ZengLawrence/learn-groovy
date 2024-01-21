@@ -17,4 +17,5 @@ config.scriptBaseClass = RobotBaseScript.name
 def shell = new GroovyShell(this.class.classLoader, binding, config)
 shell.evaluate '''
 move left
+say greeting, name
 '''
